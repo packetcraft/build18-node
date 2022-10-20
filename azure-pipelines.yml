@@ -5,7 +5,3 @@ container: ubuntu:18.04
 
 steps:
 - script: printenv
-- task: prisma-cloud-compute-scan@3
-  inputs:
-    scanType: 'images'
-    twistlockService: 'arkprismacloudazuredevops'
