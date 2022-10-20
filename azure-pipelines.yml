@@ -5,11 +5,10 @@ container: ubuntu:18.04
 
 steps:
 - task: prisma-cloud-compute-scan@3
-displayName: 'Prisma Cloud Compute Scan'
   inputs:
     scanType: 'images'
     twistlockService: 'arkprismacloudazuredevops'
-    artifact: 'myubuntu'
+    artifact: 'arkubuntu'
 - script: printenv
 
 - script: |
