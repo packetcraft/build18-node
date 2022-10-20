@@ -4,9 +4,14 @@ pool:
 container: ubuntu:18.04
 
 steps:
-- script: printenv
 - task: prisma-cloud-compute-scan@3
+displayName: 'Prisma Cloud Compute Scan'
   inputs:
     scanType: 'images'
     twistlockService: 'arkprismacloudazuredevops'
     artifact: 'myubuntu'
+- script: printenv
+
+- script: |
+    echo Add other tasks to build, test, and deploy your project.
+    echo See https://aka.ms/yaml
