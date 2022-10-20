@@ -1,19 +1,11 @@
- # Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-trigger:
-branches:
-   include:
-    - master
 pool:
   vmImage: 'ubuntu-latest'
+
+container: ubuntu:18.04
+
 steps:
+- script: printenv
 - task: prisma-cloud-compute-scan@3
   inputs:
     scanType: 'images'
     twistlockService: 'arkprismacloudazuredevops'
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-displayName: 'Run a multi-line script'
