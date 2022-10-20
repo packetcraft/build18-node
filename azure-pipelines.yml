@@ -1,0 +1,37 @@
+Starter pipeline
+
+trigger:
+- master
+
+pool:
+  vmImage: 'Ubuntu-16.04'
+
+steps:
+- task: Docker@2
+  inputs:
+    containerRegistry: 'docker_hub'
+    command: 'login'
+- task: UniversalPackages@0
+  inputs:
+    command: 'download'
+    downloadDirectory: '$(System.DefaultWorkingDirectory)'
+    feedsToUse: 'internal'
+    vstsFeed: 'd3ebb69d-542dxxxxxxxxxxxx2'
+    vstsFeedPackage: '49536ff4-8xxxxxxxxxxxxxxxxxxx'
+    vstsPackageVersion: '0.0.1'
+- task: CmdLine@2
+  inputs:
+    script: |
+      sudo mv $(System.DefaultWorkingDirectory)/twistcli /usr/bin/twistcli
+      sudo chmod +x /usr/bin/twistcli
+      docker pull nginx:latest
+- task: prisma-cloud-compute-scan@1
+  inputs:
+    scanType: 'images'
+    twistlockService: 'ppcswdemoapp'
+    vulnerabilityThreshold: 'medium'
+    onlyFixed: false
+    gracePeriod: '0'
+    complianceThreshold: 'medium'
+    artifact: 'nginx:latest'
+
