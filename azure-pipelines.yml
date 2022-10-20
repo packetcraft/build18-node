@@ -1,15 +1,10 @@
 pool:
   vmImage: 'ubuntu-latest'
 
-container: ubuntu:18.04
-
-steps:
-- task: prisma-cloud-compute-scan@3
+container: - task: CmdLine@2
   inputs:
-    scanType: 'images'
-    twistlockService: 'arkprismacloudazuredevops'
-    artifact: 'arkubuntu'
-- script: printenv
+    script: 'twistcli images scan --address $(https://us-east1.cloud.twistlock.com/us-1-111573457) --user $(8a197785-6e19-45ae-998b-92af74588cfe) --password $(I1aUVJoFEK4YM/TeliHjJaGyYKE=) --details ubuntu:18.04 | tee -a output && grep “Compliance threshold check results: PASS” output && grep “Vulnerability threshold check results: PASS” output'
+
 
 - script: |
     echo Add other tasks to build, test, and deploy your project.
