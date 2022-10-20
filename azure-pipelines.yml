@@ -8,6 +8,10 @@ pool:
 
 steps:
 - task: Docker@2
+- task: prisma-cloud-compute-scan@3
+  inputs:
+    scanType: 'images'
+    twistlockService: 'arkprismacloudazuredevops'
   inputs:
     containerRegistry: 'docker_hub'
     command: 'login'
